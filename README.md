@@ -1,0 +1,35 @@
+#  CMM FORMS
+## Estructura del proyecto
+- README.md
+- Dockerfile
+- CMMSForms.sln
+- src
+	 - Library
+	 	 - Application
+		 	 - Data/
+			 	 - Entity/
+				 	- Command/
+					 - Queries/
+			- Dtos/
+			- Extensions/
+			- Helpers/
+			- Models/
+			- Profiles/
+			- Services/
+	 	- Domain
+			 - Common/
+			 - Entities/
+			 - Options/
+			 - Repositories/
+		- Infrasctructure
+			-  Extension/
+			- Helpers/
+			- Repositories/
+	 - WebUI
+		 - wwroot/
+		 - ClientApp/
+		 - Controllers/
+		 - logs/
+		 - Pages/
+		 - Program.cs
+		 - Startup.cs
