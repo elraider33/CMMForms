@@ -1,0 +1,96 @@
+<div class="container" *ngIf="bulletin">
+  <div>
+    <h1>Service bulletin: {{bulletin.sbno}}</h1>
+  </div>
+  <div class="action-btns">
+    <a mat-raised-button (click)="onClose()">Close</a>
+    <a mat-raised-button *ngIf="isAdmin" color="primary" [routerLink]="'/modules/service-bulletins/'+bulletin.id+'/edit'">Edit</a>
+    <button mat-raised-button *ngIf="isAdmin" color="warn" (click)="deleteDialog()">Delete</button>
+  </div>
+  <table class="table head">
+    <tr>
+      <td>Requested By</td>
+      <td>{{bulletin.requestedBy}}</td>
+    </tr>
+    <tr>
+      <td>Requested On</td>
+      <td>{{bulletin.requestedOn | date:'shortDate'}}</td>
+    </tr>
+    <tr>
+      <td>Entity</td>
+      <td>{{bulletin.entity}}</td>
+    </tr>
+    <tr>
+      <td>Published</td>
+      <td>{{bulletin.published ? 'Yes': 'No'}}</td>
+    </tr>
+    <tr>
+      <td>PDF Document</td>
+      <td>
+        <a [href]="getDownloadUrl(bulletin.file?.filesId)" target="_blank" rel="noopener noreferrer">{{bulletin.file?.filename}}</a>
+        <!-- <button mat-button color="primary" (click)="downloadDocument()">{{bulletin.file?.filename}}</button> -->
+      </td>
+    </tr>
+  </table>
+  <table class="tbl-info" *ngIf="bulletin">
+    <tr class="title">
+      <td>S.B. Number</td>
+      <td>Type</td>
+      <td>Mod Number</td>
+    </tr>
+    <tr class="info">
+      <td>{{bulletin.sbno}}</td>
+      <td>{{bulletin.type}}</td>
+      <td>{{bulletin.modelNumber}}</td>
+    </tr>
+    <tr class="title">
+      <td>Initial Date</td>
+      <td>Customer</td>
+      <td>Revision</td>
+    </tr>
+    <tr class="info">
+      <td>{{bulletin.initialDate | date:'shortDate'}}</td>
+      <td>{{bulletin.customer}}</td>
+      <td>{{bulletin.manualRev}}</td>
+    </tr>
+    <tr class="title">
+      <td>Revision Date</td>
+      <td>Description</td>
+      <td>Model</td>
+    </tr>
+    <tr class="info">
+      <td>{{bulletin.revDate | date:'shortDate'}}</td>
+      <td>{{bulletin.description}}</td>
+      <td>{{bulletin.model}}</td>
+    </tr>
+    <tr class="title">
+      <td>Aircraft</td>
+      <td>CMM</td>
+      <td>Job Number</td>
+    </tr>
+    <tr class="info">
+      <td>{{bulletin.aircraft}}</td>
+
+      <td>{{bulletin.cmm}}</td>
+      <td>{{bulletin.jobNumber}}</td>
+    </tr>
+    <tr class="title">
+      <td>Repair Station Number</td>
+      <td>Seat Part/#</td>
+    </tr>
+    <tr class="info">
+
+      <td>{{bulletin.repairStationNumber}}</td>
+      <td>{{formatStringArray(bulletin.seatPartNumbers)}}</td>
+    </tr>
+    
+    <tr class="title">
+      <td colspan="2">Comments</td>
+      <td>Show to Customer Roles</td>
+    </tr>
+    <tr class="info">
+      <td colspan="2">{{bulletin.comments}}</td>
+      <td>{{formatStringArray(bulletin.roles)}}</td>
+    </tr>
+  </table>
+</div>

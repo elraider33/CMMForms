@@ -1,0 +1,29 @@
+@use '~@angular/material' as mat;
+@import '../../../../../custom-theme.scss';
+.action-btns{
+  width: 30%;
+  min-width: 310px !important;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.field-separator{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.container{
+  width: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+}
+.list-items{
+  max-height: 120px;
+  overflow-y: scroll;
+}
+.vertical-form-field {
+  .label{
+    font-weight: 700;
+  }
+}

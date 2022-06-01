@@ -1,0 +1,16 @@
+<h3>You are about to delete this {{type}}</h3>
+<div mat-dialog-content>
+  <p>Please type the following to confirm:</p>
+  <div>
+    <mat-chip>
+      {{id}}
+    </mat-chip>
+  </div>
+  <mat-form-field appearance="fill">
+    <input matInput [(ngModel)]="confirmedId">
+  </mat-form-field>
+</div>
+<div mat-dialog-actions >
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button color="warn" cdkFocusInitial (click)="onConfirm()">Ok</button>
+</div>

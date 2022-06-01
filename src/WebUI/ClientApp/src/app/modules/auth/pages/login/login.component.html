@@ -1,0 +1,32 @@
+<div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
+
+  <mat-card class="box">
+    <mat-card-header>
+      <mat-card-title>Log in</mat-card-title>
+    </mat-card-header>
+    <div *ngIf="errors">
+
+      <mat-error class="error-msg">{{errorsMsg}}</mat-error>
+    </div>
+    <form class="example-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <mat-card-content>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Username" [formControl]="username" required id="username" name="username">
+          <mat-error *ngIf="username.invalid || (username.dirty || username.touched)">
+            <p *ngIf="username.errors?.required">Username is Required</p>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <input matInput type="password" placeholder="Password" [formControl]="password" required id="password" name="password">
+          <mat-error *ngIf="password.invalid || (password.dirty || password.touched)">
+            <p *ngIf="password.errors?.required">Password is Required</p>
+          </mat-error>
+        </mat-form-field>
+      </mat-card-content>
+      <button mat-stroked-button color="primary" class="btn-block">Log in</button>
+      <!-- <button mat-stroked-button type="button" color="accent" class="btn-block" (click)="dockSiteLogin()">Log in with DockSite</button> -->
+    </form>
+  </mat-card>
+
+</div>

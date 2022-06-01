@@ -1,0 +1,16 @@
+<app-top-nav class="fixed-topnav" (open)="handleOpen($event)"></app-top-nav>
+<mat-sidenav-container class="container">
+  <!-- side-nav -->
+  <mat-sidenav appDrawer mode="side" [opened]="navOpen" class="sidenav">
+    <!-- <mat-toolbar class="toolbar"></mat-toolbar> -->
+    <!-- Elements list menu -->
+    <mat-nav-list>
+      <app-menu-list-item *ngFor="let item of navItems" [item]="item"></app-menu-list-item>
+    </mat-nav-list>
+  </mat-sidenav>
+  <!-- side-nav-content -->
+  <mat-sidenav-content>
+    <ng-content></ng-content>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+

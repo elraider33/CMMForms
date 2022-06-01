@@ -1,0 +1,48 @@
+<div class="container" *ngIf="role">
+  <div class="action-btns">
+    <a mat-raised-button [routerLink]="'/modules/roles'">Close</a>
+    <a mat-raised-button *ngIf="isAdmin" color="primary" [routerLink]="'/modules/roles/'+role.id+'/edit'">Edit</a>
+    <button mat-raised-button *ngIf="isAdmin" color="warn" (click)="deleteDialog()">Delete</button>
+  </div>
+  <div class="vertical-form-field">
+    <div class="label">Code</div>
+    <div>
+      <p>{{role.name}}</p>
+    </div>
+  </div>
+  <div class="vertical-form-field">
+    <div class="label">Description</div>
+    <div>
+      {{role.description}}
+    </div>
+  </div>
+  <div class="vertical-form-field">
+    <div class="label">Portal Accounts</div>
+    <div class="field-separator">
+      <div class="vertical-form-field">
+        <div class="label">Username:</div>
+        <div>
+          <div class="list-items">
+            <div *ngFor="let l of role.usernames">
+              <span>{{l}}</span>
+            </div>
+          </div>
+        </div>
+        <!--end form-field-->
+      </div>
+      <!--end vertical-form-field-->
+      <div class="vertical-form-field">
+        <div class="label">Email Address:</div>
+        <div>
+          <div class="list-items">
+            <div *ngFor="let l of role.emailAddresses">
+              <span>{{l}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--end separator-->
+  </div>
+</div>
+

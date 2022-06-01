@@ -1,0 +1,192 @@
+<div>
+  <div>
+    <h1>Create CMM</h1>
+  </div>
+  <form [formGroup]="cmmForm" (ngSubmit)="onSubmit()" class="container">
+    <div class="action-btns">
+      <a mat-raised-button [routerLink]="'/modules/manuals/'">Cancel</a>
+      <button mat-raised-button color="primary" type="submit">Save</button>
+    </div>
+    <table class="head">
+      <tr>
+        <td>Requested By</td>
+        <td>
+          <mat-form-field class="form-field" appearance="outline">
+            <input type="text" matInput formControlName="requestedBy" id="requestedBy" name="requestedBy">
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td>Entity</td>
+        <td>
+          <mat-form-field appearance="fill">
+            <mat-label>Select an Entity</mat-label>
+            <mat-select formControlName="entity" id="entity" name="entity">
+              <mat-option *ngFor="let e of entities" [value]="e.description">{{e.description}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td>Published</td>
+        <td>
+          <mat-radio-group aria-label="Select an option" formControlName="published" name="published" id="published">
+            <mat-radio-button [value]="true">Yes</mat-radio-button>
+            <mat-radio-button [value]="false">No</mat-radio-button>
+          </mat-radio-group>
+          <mat-error *ngIf="cmmForm.controls.published.invalid || (cmmForm.controls.published.dirty || cmmForm.controls.published.touched)">
+            <p *ngIf="cmmForm.controls.published.errors?.required">published is Mandatory</p>
+          </mat-error>
+        </td>
+      </tr>
+      <tr>
+        <td>CMM Doc</td>
+        <input type="file" class="fileInput" id="file" name="file" accept="application/pdf" (change)="onFileChange($event)">
+      </tr>
+    </table>
+    <table class="tbl-info">
+      <tr class="title">
+        <td>Customer</td>
+        <td>Cmm</td>
+        <td>Initial Date</td>
+        <td>Integrated Seats</td>
+      </tr>
+      <tr class="info">
+        <td>
+          <mat-form-field class="form-field" appearance="outline">
+            <input type="text" matInput formControlName="customer">
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field class="form-field" appearance="outline">
+            <input type="text" matInput formControlName="cmmNumber">
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field appearance="fill">
+            <mat-label>Choose a date</mat-label>
+            <input matInput [matDatepicker]="pickerinitialDate" formControlName="initialDate" id="initialDate" name="initialDate">
+            <mat-datepicker-toggle matSuffix [for]="pickerinitialDate"></mat-datepicker-toggle>
+            <mat-datepicker #pickerinitialDate></mat-datepicker>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field class="form-field" appearance="outline">
+            <textarea id="seatPartNumbers" matInput rows="3" (blur)="seatPartNumbersChange($event)" name="seatPartNumbers"></textarea>
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr class="title">
+        <td>Model</td>
+        <td>Revision</td>
+        <td>Revision Date</td>
+        <td>TSO Seats</td>
+      </tr>
+      <tr class="info">
+        <td>
+          <mat-form-field class="form-field" appearance="outline">
+            <input type="text" matInput formControlName="model">
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field class="form-field" appearance="outline">
+            <input type="text" matInput formControlName="manualRev">
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field appearance="fill">
+            <mat-label>Choose a date</mat-label>
+            <input matInput [matDatepicker]="pickerrevDate" formControlName="revDate" id="revDate" name="revDate">
+            <mat-datepicker-toggle matSuffix [for]="pickerrevDate"></mat-datepicker-toggle>
+            <mat-datepicker #pickerrevDate></mat-datepicker>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field class="form-field" appearance="outline">
+            <textarea id="seatPartNumbersTSO" matInput rows="3" [formControl]="tsoFormControl" (blur)="seatPartNumbersTSOChange($event)" name="seatPartNumbersTSO" appearance="outline"></textarea>
+          </mat-form-field>
+
+        </td>
+
+      </tr>
+      <tr class="title">
+        <td>Aircraft</td>
+        <td>Job No</td>
+        <td>Aircraft Installation</td>
+        <td>Config</td>
+      </tr>
+      <tr class="info">
+        <td>
+          <mat-form-field class="form-field" appearance="outline">
+            <input type="text" matInput formControlName="aircraft">
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field class="form-field" appearance="outline">
+            <input type="text" matInput formControlName="jobNo">
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field class="form-field" appearance="outline">
+            <input type="text" matInput formControlName="aircraftInstallation">
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field class="form-field" appearance="outline">
+            <input type="text" matInput formControlName="config">
+          </mat-form-field>
+        </td>
+      </tr>
+
+      <tr class="title">
+        <td>Incorporated Seat Assemblies</td>
+        <td>Service Bulletin(s)</td>
+        <td>Reference</td>
+        <td>Trim & Finish</td>
+      </tr>
+      <tr class="info">
+        <td>
+          <mat-form-field class="form-field" appearance="outline">
+            <textarea matInput id="incorporatedSeatAssemblies" rows="3" (blur)="incorporatedSeatAssembliesChange($event)"></textarea>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field class="form-field" appearance="outline">
+            <textarea matInput id="serviceBulletins" rows="3" (blur)="serviceBulletinsChange($event)"></textarea>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field class="form-field" appearance="outline">
+            <textarea matInput id="reference" rows="3" (blur)="referenceChange($event)"></textarea>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field class="form-field" appearance="outline">
+            <input type="text" matInput formControlName="trimFinish">
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr class="title">
+      </tr>
+      <tr class="info">
+      </tr>
+      <tr class="title">
+        <td>Comments</td>
+        <td>Show to Customer Roles</td>
+      </tr>
+      <tr class="info">
+        <td>
+          <mat-form-field class="form-field" appearance="outline">
+            <input type="text" matInput formControlName="comments">
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field class="form-field" appearance="outline">
+            <textarea id="roles" [formControl]="rolesFormControl" matInput rows="3" (blur)="rolesChange($event)"></textarea>
+          </mat-form-field>
+        </td>
+      </tr>
+    </table>
+  </form>
+</div>
+

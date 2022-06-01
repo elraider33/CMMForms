@@ -1,0 +1,27 @@
+/* You can add global styles to this file, and also import other style files */
+
+/* Provide sufficient contrast against white background */
+@import './custom-theme.scss';
+
+*{
+  font-family: 'Padauk', sans-serif;
+}
+.wrapper{
+  margin: 20px;
+}
+
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Padauk, "Helvetica Neue", sans-serif; }
+
+.mat-sort-header-content{
+  color: #002e4c
+}
+.cdk-overlay-backdrop.cdk-overlay-backdrop-showing.dark-backdrop {
+  background: #000;
+  opacity: 0.75 !important;
+}
+
+// mat-sidenav-content{
+//   overflow: hidden !important;
+// }

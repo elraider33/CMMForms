@@ -1,0 +1,49 @@
+<div>
+  <h3>Entities</h3>
+  <div>
+    <form [formGroup]="entityForm" (ngSubmit)="onSubmit()">
+      <mat-form-field style="width: 30%;">
+        <input matInput placeholder="Description" [formControl]="description" required id="description" name="description" minlength="2" maxlength="50">
+        <mat-error *ngIf="description.invalid || (description.dirty || description.touched)">
+          <p *ngIf="description.errors?.required">Description is Required</p>
+          <p *ngIf="description.errors?.minlength">The description must be at least 2 characters</p>
+          <p *ngIf="description.errors?.maxlength">The description must be less than 50 characters</p>
+        </mat-error>
+      </mat-form-field>
+      <button mat-raised-button color="primary">New</button>
+    </form>
+  </div>
+  <mat-form-field appearance="standard">
+    <mat-label>Filter</mat-label>
+    <input matInput (keyup)="applyFilter($event)" placeholder="start typing to filter" #input>
+  </mat-form-field>
+
+  <div class="mat-elevation-z8">
+    <table *ngIf="dataSource" mat-table [dataSource]="dataSource" matSort>
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Id</th>
+        <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+      </ng-container>
+      <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Description</th>
+        <td mat-cell *matCellDef="let row"> {{row.description}} </td>
+      </ng-container>
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell  *matHeaderCellDef>Actions</th>
+        <td mat-cell *matCellDef="let row" >
+             <a mat-button color="primary" [routerLink]="['/service-bulletins', row.id]">View</a>
+             <a mat-button color="accent" [routerLink]="['/service-bulletins', row.id,'edit']">Edit</a>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+      <!-- Row shown when there is no matching data. -->
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+      </tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[10, 25, 100]" aria-label="Select page of Entities"></mat-paginator>
+  </div>
+</div>
+

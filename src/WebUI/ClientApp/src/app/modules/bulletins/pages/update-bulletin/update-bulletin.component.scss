@@ -1,0 +1,40 @@
+
+@use '~@angular/material' as mat;
+@import '../../../../../custom-theme.scss';
+.mat-radio-button ~ .mat-radio-button {
+  margin-left: 16px;
+}
+table.head{
+  table-layout: fixed;
+  align-self: flex-start;
+    margin-left: 150px;
+    // width: 15%;
+    tr > td:nth-child(1){
+      width: 150px;
+      font-weight: 600;
+    }
+}
+
+
+table.tbl-info{
+  width: 80%;
+}
+.container{
+  width: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+}
+.title{
+
+    background-color: #002e4c;
+    color: white;
+}
+
+.info {
+  height: 60px;
+}
+mat-form-field{
+  width: 100%;
+}

@@ -1,0 +1,85 @@
+@use '~@angular/material' as mat;
+@import '../../../../custom-theme.scss';
+@import '../../../breakpoints';
+$whiteColor: white;
+$d55Color: #00587c;
+.mat-sidenav {
+  width: 230px;
+}
+.mat-sidenav-container {
+  background-color: white !important;
+  height: 100vh;
+
+  .mat-sidenav-content {
+    display: flex;
+    flex-direction: column;
+  }
+}
+.sidenav-toolbar {
+  height: 64px;
+  background-color: mat.get-color-from-palette($app-primary, '900');
+  display: flex;
+  flex-direction: row;
+
+  @media (max-width: 600px) {
+    height: 56px;
+  }
+}
+.mat-nav-list {
+  padding-top: 0;
+}
+@include breakpoint-max(600px) {
+  .fixed-topnav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    width: 100% !important;
+  }
+
+  .mat-drawer-container,
+  .mat-drawer {
+    padding-top: 56px;
+  }
+}
+.menu-list-item.mat-list-item {
+  .mat-list-item-content {
+    flex: 1 1 100%;
+  }
+}
+// $whiteColor: white;
+// $d55Color: #00587c;
+
+// .container{
+//   position: absolute;
+//   top: 0;
+//   bottom: 0;
+//   left: 0;
+//   right: 0;
+
+//   .sidenav{
+//     background-color: $d55Color;
+
+//     .toolbar{
+//       color: $whiteColor;
+//       background-color: $d55Color;
+//       display: flex;
+//       justify-content: center;
+//     }
+
+//     /*
+//     * Navigation
+//     */
+//     .mat-list-item a{
+//       color: $whiteColor;
+//       text-decoration: none;
+//     }
+//   }
+
+//   .mat-sidenav-content{
+//     .toolbar{
+//       color: $whiteColor;
+//       background-color: $d55Color;
+//     }
+//   }
+// }

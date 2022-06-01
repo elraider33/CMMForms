@@ -1,0 +1,87 @@
+<div>
+  <form [formGroup]="roleForm" (ngSubmit)="onSubmit()" class="container">
+    <div class="action-btns">
+      <a mat-raised-button [routerLink]="'/modules/roles/'">Cancel</a>
+      <span class="space"></span>
+      <button mat-raised-button color="primary" type="submit">Save</button>
+    </div>
+    <div class="vertical-form-field">
+      <div class="label">Code</div>
+      <div>
+        <mat-form-field appearance="fill" class="no-label-field">
+          <input
+            matInput
+            formControlName="code"
+            id="code"
+            name="code"
+            required
+            minlength="3"
+            maxlength="50"
+          />
+          <mat-error
+            *ngIf="
+              roleForm.controls.code.invalid ||
+              roleForm.controls.code.dirty || roleForm.controls.code.touched
+            "
+          >
+            <p *ngIf="roleForm.controls.code.errors?.required">
+              Code is Required
+            </p>
+            <p *ngIf="roleForm.controls.code.errors?.minlength">
+              The Code must be at least 3 characters
+            </p>
+            <p *ngIf="roleForm.controls.code.errors?.maxlength">
+              The Code must be less than 50 characters
+            </p>
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="vertical-form-field">
+      <div class="label">Description</div>
+      <div>
+        <mat-form-field appearance="fill" class="no-label-field">
+          <input
+            matInput
+            formControlName="description"
+            id="description"
+            name="description"
+          />
+          <mat-error
+            *ngIf="
+              roleForm.controls.description.invalid ||
+              roleForm.controls.description.dirty ||
+                roleForm.controls.description.touched
+            "
+          >
+            <p *ngIf="roleForm.controls.description.errors?.required">
+              Description is Required
+            </p>
+            <p *ngIf="roleForm.controls.description.errors?.minlength">
+              The Description must be at least 3 characters
+            </p>
+            <p *ngIf="roleForm.controls.description.errors?.maxlength">
+              The Description must be less than 50 characters
+            </p>
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="vertical-form-field">
+      <div class="label">Portal Accounts</div>
+      <div class="field-separator">
+        <!--end vertical-form-field-->
+        <div class="vertical-form-field">
+          <div class="label">Email Address:</div>
+          <div>
+            <input-multiple
+              [list]="email"
+              (onAddValue)="onAddEmailValue($event)"></input-multiple>
+          </div>
+        </div>
+      </div>
+      <!--end separator-->
+    </div>
+    <!--end vertical-form-field-->
+  </form>
+</div>

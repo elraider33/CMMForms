@@ -1,0 +1,133 @@
+<div class="container" *ngIf="cmm">
+  <div>
+    <h1>CMM: {{cmm.cmmNumber}}</h1>
+  </div>
+  <div class="action-btns">
+    <a mat-raised-button (click)="onClose()">Close</a>
+    <a mat-raised-button *ngIf="isAdmin" color="primary" [routerLink]="'/modules/manuals/'+cmm.id+'/edit'">Edit</a>
+    <button mat-raised-button *ngIf="isAdmin" color="warn" (click)="deleteDialog()">Delete</button>
+  </div>
+  <table class="head">
+    <tr>
+      <td>Requested By</td>
+      <td>
+        {{cmm.requestedBy}}
+      </td>
+    </tr>
+    <tr>
+      <td>Entity</td>
+      <td>
+        {{cmm.entity}}
+      </td>
+    </tr>
+    <tr>
+      <td>Published</td>
+      <td>
+        {{ getBooleanText(cmm.published) }}
+      </td>
+    </tr>
+    <tr>
+      <td>CMM Doc</td>
+      <td>
+        <a [href]="getDownloadUrl(cmm.file?.filesId)" target="_blank" rel="noopener noreferrer">{{cmm.file?.filename}}</a>
+        <!-- <button mat-button color="primary" (click)="downloadDocument()">{{cmm.file?.filename}}</button> -->
+      </td>
+    </tr>
+  </table>
+  <table class="tbl-info">
+    <tr class="title">
+      <td>Customer</td>
+      <td>comment</td>
+      <td>Initial Date</td>
+      <td>Integrated Seats</td>
+    </tr>
+    <tr class="info">
+      <td>
+        {{cmm.customer}}
+      </td>
+      <td>
+        {{cmm.cmmNumber}}
+      </td>
+      <td>
+        {{cmm.initialDate | date:'shortDate'}}
+      </td>
+      <td>
+        {{formatStringArray(cmm.seatPartNumbers)}}
+      </td>
+    </tr>
+    <tr class="title">
+      <td>Model</td>
+      <td>Revision</td>
+      <td>Revision Date</td>
+      <td>TSO Seats</td>
+    </tr>
+    <tr class="info">
+      <td>
+        {{cmm.model}}
+      </td>
+      <td>
+        {{cmm.manualRev}}
+      </td>
+      <td>
+        {{cmm.revDate | date:'shortDate'}}
+      </td>
+      <td>
+        {{formatStringArray(cmm.seatPartNumbersTSO)}}
+      </td>
+    </tr>
+    <tr class="title">
+      <td>Aircraft</td>
+      <td>Job No</td>
+      <td>Aircraft Installation</td>
+      <td>Config</td>
+    </tr>
+    <tr class="info">
+      <td>
+        {{cmm.aircraft}}
+      </td>
+      <td>
+        {{cmm.jobNo === 'null' ? '' : cmm.jobNo}}
+      </td>
+      <td>
+        {{cmm.aircraftInstallation === 'null' ? '' : cmm.aircraftInstallation}}
+      </td>
+      <td>
+        {{cmm.config === 'null' ? '' : cmm.config}}
+      </td>
+
+    </tr>
+    <tr class="title">
+      <td>Incorporated Seat Assemblies</td>
+      <td>Service Bulletin(s)</td>
+      <td>Reference</td>
+      <td>Trim & Finish</td>
+    </tr>
+    <tr class="info">
+      <td>
+        {{formatStringArray(cmm.incorporatedSeatAssemblies)}}
+      </td>
+      <td>
+        {{formatStringArray(cmm.serviceBulletins)}}
+      </td>
+      <td>
+        {{formatStringArray(cmm.reference)}}
+      </td>
+      <td>
+        {{cmm.trimFinish === 'null' ? '' : cmm.trimFinish}}
+      </td>
+    </tr>
+    <tr class="title">
+      <td>Comments</td>
+      <td>Show to Customer Roles</td>
+    </tr>
+    <tr class="info">
+      <td>
+        {{cmm.comments === 'null' ? '' : cmm.comments}}
+      </td>
+      <td>
+        {{formatStringArray(cmm.roles)}}
+      </td>
+    </tr>
+  </table>
+</div>
+

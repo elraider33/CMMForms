@@ -1,0 +1,61 @@
+
+@use '~@angular/material' as mat;
+@import '../../../../../custom-theme.scss';
+.action-btns{
+
+  width: 80%;
+  min-width: 310px !important;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+  .space{
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+}
+.field-separator{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.mat-radio-button ~ .mat-radio-button {
+  margin-left: 16px;
+}
+table.head{
+  table-layout: fixed;
+  align-self: flex-start;
+    margin-left: 150px;
+    // width: 15%;
+    tr > td:nth-child(1){
+      width: 150px;
+      font-weight: 600;
+      margin-right: 20px;
+    }
+}
+
+.vertical-form-field{
+  margin-bottom: 10px;
+}
+
+table.tbl-info{
+  width: 80%;
+}
+.container{
+  width: 70%;
+  // display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+}
+.title{
+
+    background-color: #002e4c;
+    color: white;
+}
+
+.info {
+  height: 60px;
+}
+mat-form-field{
+  width: 100%;
+}

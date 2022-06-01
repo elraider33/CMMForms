@@ -1,0 +1,18 @@
+<div>
+  <div>
+    <mat-form-field class="no-label-field">
+      <input matInput type="text" [formControl]="value">
+    </mat-form-field>
+    <button mat-icon-button type="button" (click)="addValue()">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+  <div class="list-items">
+    <div *ngFor="let l of list; let i = index">
+      <span>{{l}}</span>
+      <button mat-icon-button type="button" (click)="removeValue(i, l)">
+        <mat-icon>remove</mat-icon>
+      </button>
+    </div>
+  </div>
+</div>

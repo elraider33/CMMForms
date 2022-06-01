@@ -1,0 +1,228 @@
+<div>
+<div>
+  <h1>Create Service Bulletin</h1>
+</div>
+<form [formGroup]="bulletinForm" (ngSubmit)="onSubmit()" class="container">
+<div class="action-btns">
+  <a mat-raised-button [routerLink]="['/', 'modules','service-bulletins']">Cancel</a>
+  <button mat-raised-button color="primary" type="submit">Save</button>
+</div>
+<table class="head">
+  <tr>
+    <td>Requested By</td>
+    <td>
+      <mat-form-field class="form-field" appearance="outline">
+        <input type="text" matInput formControlName="requestedBy" id="requestedBy" name="requestedBy">
+        <mat-error *ngIf="bulletinForm.controls.requestedBy.invalid || (bulletinForm.controls.requestedBy.dirty || bulletinForm.controls.requestedBy.touched)">
+          <p *ngIf="bulletinForm.controls.requestedBy.errors?.required">Requested By is Mandatory</p>
+        </mat-error>
+      </mat-form-field>
+    </td>
+  </tr>
+  <tr>
+    <td>Requested On</td>
+    <td>
+      <mat-form-field appearance="fill">
+        <mat-label>Choose a date</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="requestedOn" id="requestedOn" name="requestedOn">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </td>
+  </tr>
+
+  <tr>
+    <td>Entity</td>
+    <td>
+      <mat-form-field appearance="fill">
+        <mat-label>Select an Entity</mat-label>
+        <mat-select formControlName="entity" id="entity" name="entity">
+          <mat-option *ngFor="let e of entities" [value]="e.description">{{e.description}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </td>
+  </tr>
+  <tr>
+    <td>Published</td>
+    <td>
+      <mat-radio-group aria-label="Select an option" formControlName="published">
+        <mat-radio-button [value]="true">Yes</mat-radio-button>
+        <mat-radio-button [value]="false">No</mat-radio-button>
+      </mat-radio-group>
+      <mat-error *ngIf="bulletinForm.controls.published.invalid || (bulletinForm.controls.published.dirty || bulletinForm.controls.published.touched)">
+        <p *ngIf="bulletinForm.controls.published.errors?.required">published is Mandatory</p>
+      </mat-error>
+    </td>
+  </tr>
+  <tr>
+    <td>PDF Document</td>
+    <input type="file" class="fileInput" id="file" name="file" accept="application/pdf" (change)="onFileChange($event)">
+  </tr>
+</table>
+<table class="tbl-info">
+  <tr class="title">
+    <td>S.B. Number</td>
+    <td>Type</td>
+    <td>Mod Number</td>
+  </tr>
+  <tr class="info">
+    <td>
+      <mat-form-field class="form-field" appearance="outline">
+        <input type="text" matInput formControlName="sbno">
+        <mat-error *ngIf="bulletinForm.controls.sbno.invalid || (bulletinForm.controls.sbno.dirty || bulletinForm.controls.sbno.touched)">
+          <p *ngIf="bulletinForm.controls.sbno.errors?.required">S.B. Number is Mandatory</p>
+        </mat-error>
+      </mat-form-field>
+    </td>
+    <td>
+      <mat-form-field class="form-field" appearance="outline">
+        <input type="text" matInput formControlName="type">
+        <mat-error *ngIf="bulletinForm.controls.type.invalid || (bulletinForm.controls.type.dirty || bulletinForm.controls.type.touched)">
+          <p *ngIf="bulletinForm.controls.type.errors?.required">Type is Mandatory</p>
+        </mat-error>
+      </mat-form-field></td>
+    <td>
+      <mat-form-field class="form-field" appearance="outline">
+        <input type="text" matInput formControlName="modelNumber">
+        <mat-error *ngIf="bulletinForm.controls.modelNumber.invalid || (bulletinForm.controls.modelNumber.dirty || bulletinForm.controls.modelNumber.touched)">
+          <p *ngIf="bulletinForm.controls.modelNumber.errors?.required">Mod Number is Mandatory</p>
+        </mat-error>
+      </mat-form-field></td>
+  </tr>
+  <tr class="title">
+    <td>Initial Date</td>
+    <td>Customer</td>
+    <td>Revision</td>
+  </tr>
+  <tr class="info">
+    <td>
+      <mat-form-field appearance="fill">
+        <mat-label>Choose a date</mat-label>
+        <input matInput [matDatepicker]="pickerinitialDate" formControlName="initialDate" id="initialDate" name="initialDate">
+        <mat-datepicker-toggle matSuffix [for]="pickerinitialDate"></mat-datepicker-toggle>
+        <mat-datepicker #pickerinitialDate></mat-datepicker>
+      </mat-form-field>
+    </td>
+    <td>
+      <mat-form-field class="form-field" appearance="outline">
+        <input type="text" matInput formControlName="customer">
+        <mat-error *ngIf="bulletinForm.controls.customer.invalid || (bulletinForm.controls.customer.dirty || bulletinForm.controls.customer.touched)">
+          <p *ngIf="bulletinForm.controls.customer.errors?.required">Customer is Mandatory</p>
+        </mat-error>
+      </mat-form-field>
+
+    </td>
+    <td>
+      <mat-form-field class="form-field" appearance="outline">
+        <input type="text" matInput formControlName="manualRev">
+      </mat-form-field>
+    </td>
+  </tr>
+  <tr class="title">
+    <td>Revision Date</td>
+    <td>Description</td>
+    <td>Model</td>
+  </tr>
+  <tr class="info">
+    <td>
+      <mat-form-field appearance="fill">
+        <mat-label>Choose a date</mat-label>
+        <input matInput [matDatepicker]="pickerrevDate" formControlName="revDate" id="revDate" name="revDate">
+        <mat-datepicker-toggle matSuffix [for]="pickerrevDate"></mat-datepicker-toggle>
+        <mat-datepicker #pickerrevDate></mat-datepicker>
+      </mat-form-field>
+    </td>
+    <td>
+      <mat-form-field class="form-field" appearance="outline">
+        <input type="text" matInput formControlName="description">
+      </mat-form-field>
+    </td>
+    <td>
+      <mat-form-field class="form-field" appearance="outline">
+        <input type="text" matInput formControlName="model">
+      </mat-form-field>
+    </td>
+  </tr>
+  <tr class="title">
+    <td>Aircraft</td>
+
+    <td>CMM</td>
+  </tr>
+  <tr class="info">
+    <td>
+      <mat-form-field class="form-field" appearance="outline">
+        <input type="text" matInput formControlName="aircraft">
+        <mat-error *ngIf="bulletinForm.controls.aircraft.invalid || (bulletinForm.controls.aircraft.dirty || bulletinForm.controls.aircraft.touched)">
+          <p *ngIf="bulletinForm.controls.aircraft.errors?.required">Aircraft is Mandatory</p>
+        </mat-error>
+      </mat-form-field>
+
+    </td>
+    <td>
+      <mat-form-field class="form-field" appearance="outline">
+        <textarea id="cmm" matInput rows="3" [formControl]="cmmFormControl" (blur)="cmmChange($event)" required></textarea>
+        <mat-error *ngIf="bulletinForm.controls.cmm.invalid || (bulletinForm.controls.cmm.dirty || bulletinForm.controls.cmm.touched)">
+          <p *ngIf="bulletinForm.controls.cmm.errors?.required">CMM is Mandatory</p>
+        </mat-error>
+      </mat-form-field>
+    </td>
+  </tr>
+  <tr class="title">
+    <td>Job Number</td>
+    <td>Repair Station Number</td>
+  </tr>
+  <tr class="info">
+    <td>
+      <mat-form-field class="form-field" appearance="outline">
+        <input type="text" matInput formControlName="jobNumber">
+      </mat-form-field>
+    </td>
+    <td>
+      <mat-form-field class="form-field" appearance="outline">
+        <input type="text" matInput formControlName="repairStationNumber">
+      </mat-form-field>
+    </td>
+  </tr>
+  <tr class="title">
+
+    <td>Seat Part/#</td>
+  </tr>
+  <tr class="info">
+    <td>
+      <mat-form-field class="form-field" appearance="outline">
+        <textarea matInput id="seatPartNumbers" rows="3" (blur)="seatPartChange($event)"></textarea>
+      </mat-form-field>
+    </td>
+
+  </tr>
+  <tr class="title">
+    <td colspan="2">Comments</td>
+    <td>Show to Customer Roles</td>
+  </tr>
+  <tr class="info">
+    <td colspan="2">
+      <mat-form-field class="form-field" appearance="outline">
+        <input type="text" matInput formControlName="comments">
+      </mat-form-field>
+    </td>
+    <td>
+      <mat-form-field class="form-field" appearance="outline">
+        <textarea id="roles" matInput rows="3" [formControl]="rolesFormControl" (blur)="rolesChange($event)" required></textarea>
+        <mat-error *ngIf="bulletinForm.controls.roles.invalid || (bulletinForm.controls.roles.dirty || bulletinForm.controls.roles.touched)">
+          <p *ngIf="bulletinForm.controls.roles.errors?.required">Roles is Mandatory</p>
+        </mat-error>
+      </mat-form-field>
+      <!-- <div style="display: flex;" >
+        <input id="roles" matInput rows="3" [formControl]="rolesFormControl" required/>
+      </div>
+      <div>
+        <ul>
+          <li *ngFor="let r of roles">{{r}} <button type="button">-</button></li>
+        </ul>
+      </div> -->
+    </td>
+  </tr>
+</table>
+</form>
+</div>
+
